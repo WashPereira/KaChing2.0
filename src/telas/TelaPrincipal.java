@@ -17,6 +17,7 @@ import java.awt.Color;
 import javax.swing.UIManager;
 import java.awt.Font;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 
 
 public class TelaPrincipal extends JFrame {
@@ -24,6 +25,7 @@ public class TelaPrincipal extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private JTable table_1;
+	private JTable table_2;
 	
 
 	/**
@@ -144,6 +146,28 @@ public class TelaPrincipal extends JFrame {
 		table_1 = new JTable();
 		table_1.setBounds(42, 189, 214, -107);
 		panel_2.add(table_1);
+		
+		table_2 = new JTable();
+		table_2.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+			},
+			new String[] {
+				"Despesa", "Valor"
+			}
+		));
+		table_2.getColumnModel().getColumn(0).setPreferredWidth(446);
+		table_2.setBounds(20, 58, 765, 345);
+		panel_2.add(table_2);
 	
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(Color.WHITE);
