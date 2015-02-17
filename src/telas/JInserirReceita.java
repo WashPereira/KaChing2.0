@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import classes_extras.Conexao;
 import classes_extras.JNumberFormatField;//importando classe da mascara.
 
 import javax.swing.JFormattedTextField;
@@ -23,12 +24,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 public class JInserirReceita extends JFrame {
 
 	private JPanel contentPane;
+	Conexao conecta = new Conexao();//conecantando ao banco de dados
 
 	/**
 	 * Launch the application.
@@ -50,6 +55,7 @@ public class JInserirReceita extends JFrame {
 	 * Create the frame.
 	 */
 	public JInserirReceita() {
+		conecta.conectar();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 750, 700);
 		contentPane = new JPanel();
@@ -80,62 +86,57 @@ public class JInserirReceita extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JNumberFormatField inserir_saldo = new JNumberFormatField();
-		inserir_saldo.setFont(new Font("Century Gothic", Font.PLAIN, 16));
-		inserir_saldo.setBounds(10, 54, 694, 30);
-		panel.add(inserir_saldo);
-		inserir_saldo.setToolTipText("Clique para inserir ou acrescentar um novo valor para o caixa.");
+		JNumberFormatField InserirSaldo = new JNumberFormatField();
+		InserirSaldo.setFont(new Font("Century Gothic", Font.PLAIN, 16));
+		InserirSaldo.setBounds(10, 54, 694, 30);
+		panel.add(InserirSaldo);
+		InserirSaldo.setToolTipText("Clique para inserir ou acrescentar um novo valor para o caixa.");
 		
 		JLabel lblInserir = new JLabel("Inserir:");
 		lblInserir.setBounds(10, 29, 108, 14);
 		panel.add(lblInserir);
 		lblInserir.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(null, "Atualizar saldo atual da poupan\u00E7a", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(10, 249, 714, 104);
-		contentPane.add(panel_1);
-		panel_1.setLayout(null);
-		
-		JNumberFormatField poupanca = new JNumberFormatField();
-		poupanca.setFont(new Font("Century Gothic", Font.PLAIN, 16));
-		poupanca.setBounds(10, 52, 694, 30);
-		panel_1.add(poupanca);
-		poupanca.setToolTipText("Clique para inserir um valor para acrescentar em sua poupan\u00E7a.");
-		
-		JLabel lblPoupana = new JLabel("Poupan\u00E7a:");
-		lblPoupana.setBounds(10, 25, 90, 16);
-		panel_1.add(lblPoupana);
-		lblPoupana.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Sair", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_2.setBounds(10, 364, 714, 90);
-		contentPane.add(panel_2);
-		panel_2.setLayout(null);
-		
 		JLabel lblVoltar = new JLabel("Voltar");
+		lblVoltar.setBounds(29, 295, 121, 56);
+		contentPane.add(lblVoltar);
 		lblVoltar.setForeground(Color.DARK_GRAY);
 		lblVoltar.setFont(new Font("Century Gothic", Font.PLAIN, 16));
 		lblVoltar.setIcon(new ImageIcon(JInserirReceita.class.getResource("/img/leftarrow.png")));
-		lblVoltar.setBounds(10, 23, 121, 56);
-		panel_2.add(lblVoltar);
 		
-		JLabel lblPoupar = new JLabel("Poupar");
-		lblPoupar.setBounds(589, 23, 115, 56);
-		panel_2.add(lblPoupar);
-		lblPoupar.setToolTipText("Clique para atualizar o saldo de sua poupan\u00E7a.");
-		lblPoupar.addMouseListener(new MouseAdapter() {
+		JLabel lblSalvar = new JLabel("Salvar");
+		lblSalvar.setBounds(590, 310, 115, 56);
+		contentPane.add(lblSalvar);
+		lblSalvar.setToolTipText("Clique para atualizar o saldo de sua poupan\u00E7a.");
+		lblSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				String teste = poupanca.getText().replaceAll("[^1-9]",""); // Isso irá retirar qualquer caracter diferente de 1 e 9.
-				if (teste.isEmpty()){
-					JOptionPane.showMessageDialog(poupanca, "O campo está vazio. Verifique e tente novamente!");
+				try {
+					PreparedStatement pst = conecta.conn.prepareStatement("INSERT INTO receita (id_perfil, mes_ano_receita, valor_receita, id_receita) VALUES (?,?,?,?)");//passar os dados por parametro para a tabela.
+					
+					//--Capturar as informações do formulário para o banco--//
+					pst.setInt(1, 4);
+					pst.setDate(2, java.sql.Date.valueOf(java.time.LocalDate.now()));
+					pst.setBigDecimal(3, InserirSaldo.getValue());
+					pst.setInt(4, 1);
+					
+					
+					//--verificar os campos obrigatórios--//
+					if(InserirSaldo.getText() == null && InserirSaldo.getText().length() < 0 && InserirSaldo.getText().replaceAll("[^1-9]","").isEmpty()){
+						JOptionPane.showMessageDialog(rootPane, "Verifique os campos obrigatórios!");
+					}else{
+						pst.executeUpdate();
+						JOptionPane.showMessageDialog(rootPane, "Dados salvos com sucesso!");
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					JOptionPane.showMessageDialog(rootPane, "ERRO:!"+e.getMessage());
 				}
 			}
 		});
-		lblPoupar.setForeground(Color.DARK_GRAY);
-		lblPoupar.setIcon(new ImageIcon(JInserirReceita.class.getResource("/img/pig.png")));
-		lblPoupar.setFont(new Font("Century Gothic", Font.PLAIN, 16));
+		lblSalvar.setForeground(Color.DARK_GRAY);
+		lblSalvar.setIcon(new ImageIcon(JInserirReceita.class.getResource("/img/floppy1.png")));
+		lblSalvar.setFont(new Font("Century Gothic", Font.PLAIN, 16));
 	}
 }
