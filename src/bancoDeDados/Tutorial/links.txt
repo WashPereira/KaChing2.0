@@ -1,0 +1,5 @@
+http://www.enterprisedb.com/products-services-training/pgdownload#windows  versão 9.4.0 64bits(no meu)
+É muito importante lembrar da senha que colocar quando tiver instalando, eu coloquei na minha 123
+
+https://www.youtube.com/watch?v=yateFR_v-d8 -> video de como fazer a conexão com o BD
+https://jdbc.postgresql.org/download.html   - JDBC41 <-conector usado
