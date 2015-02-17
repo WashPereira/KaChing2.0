@@ -23,6 +23,7 @@ public class TelaPrincipal extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
+	private JTable table_1;
 	
 
 	/**
@@ -139,6 +140,10 @@ public class TelaPrincipal extends JFrame {
 		JLabel lblInserirTabelaAqui = new JLabel("Inserir tabela aqui");
 		lblInserirTabelaAqui.setBounds(10, 33, 113, 14);
 		panel_2.add(lblInserirTabelaAqui);
+		
+		table_1 = new JTable();
+		table_1.setBounds(42, 189, 214, -107);
+		panel_2.add(table_1);
 	
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(Color.WHITE);
