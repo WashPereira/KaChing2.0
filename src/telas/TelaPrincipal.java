@@ -48,7 +48,7 @@ public class TelaPrincipal extends JFrame {
 	public TelaPrincipal() {
 		setTitle("KaChing");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1366, 700);
+		setBounds(1, 1, 1366, 700);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
