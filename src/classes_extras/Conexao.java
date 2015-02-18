@@ -33,4 +33,19 @@ public class Conexao {
 			JOptionPane.showMessageDialog(null, "Erro ao fechar"+ex.getMessage());
 		}
 	}
+	
+	public void executarSQL(String sql){
+		try{
+			stm = Conexao.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
+			rs = stm.executeQuery(sql);
+		}catch (SQLException sqlex){
+			JOptionPane.showMessageDialog(null, "Erro: "+sqlex+" comando: "+sql );
+		}
+	}
+
+	private static Statement createStatement(int typeScrollSensitive,
+			int concurReadOnly) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

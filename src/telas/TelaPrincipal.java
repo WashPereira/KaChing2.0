@@ -6,28 +6,96 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Panel;
+
 import javax.swing.border.TitledBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+
+import classes_extras.Conexao;
+import classes_extras.modeloTabela;
+
 import com.toedter.calendar.JCalendar;
+
 import javax.swing.JTable;
+
 import java.awt.Color;
+
 import javax.swing.UIManager;
+
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.*;
 
 public class TelaPrincipal extends JFrame {
 
 	private JPanel contentPane;
-	private JTable table;
+	// private JTable table;
 	private JTable table_2;
+	Conexao conecta = new Conexao();
 
 	/**
 	 * Launch the application.
+	 * 
+	 * @param ex
 	 */
+
+	public void preencherTabela(String sql) {
+		ArrayList dados = new ArrayList();
+
+		String[] Colunas = new String[] { "ID", "IDP", "Despesa", "Check-in",
+				"Vencimento", "Descrição" };
+
+		// conecta.executarSQL(sql);
+		conecta.executarSQL(sql);
+
+		try {
+			conecta.rs.first();
+			do {
+				dados.add(new Object[] { conecta.rs.getInt("id_despesa"),
+						conecta.rs.getInt("id_perfil"),
+						conecta.rs.getString("nome_desp"),
+						conecta.rs.getBoolean("check_desp"),
+						conecta.rs.getDate("vencimento"),
+						conecta.rs.getString("descricao_desp") });
+
+			} while (conecta.rs.next());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			JOptionPane
+					.showMessageDialog(null, "Erro ao preencher a tabela \n");
+		}
+
+		modeloTabela modelo = new modeloTabela(dados, Colunas);
+		table_2.setModel(modelo);
+		table_2.getColumnModel().getColumn(0).setPreferredWidth(80);
+		table_2.getColumnModel().getColumn(0).setResizable(false);
+		table_2.getColumnModel().getColumn(1).setPreferredWidth(80);
+		table_2.getColumnModel().getColumn(1).setResizable(false);
+		table_2.getColumnModel().getColumn(2).setPreferredWidth(80);
+		table_2.getColumnModel().getColumn(2).setResizable(false);
+		table_2.getColumnModel().getColumn(3).setPreferredWidth(80);
+		table_2.getColumnModel().getColumn(3).setResizable(false);
+		table_2.getColumnModel().getColumn(4).setPreferredWidth(80);
+		table_2.getColumnModel().getColumn(4).setResizable(false);
+		table_2.getColumnModel().getColumn(5).setPreferredWidth(80);
+		table_2.getColumnModel().getColumn(5).setResizable(false);
+		table_2.setAutoResizeMode(table_2.AUTO_RESIZE_OFF);
+		table_2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+	}
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -45,6 +113,7 @@ public class TelaPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaPrincipal() {
+		conecta.conectar();
 		setTitle("KaChing");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(1, 1, 1366, 700);
@@ -53,6 +122,7 @@ public class TelaPrincipal extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		preencherTabela("select * from despesas order by id_despesa");
 
 		JPanel panel = new JPanel();
 		panel.setForeground(Color.LIGHT_GRAY);
