@@ -20,7 +20,7 @@ public class Conexao {
 		try{
 			System.setProperty("jdbc.Drivers", driver);
 			conn = DriverManager.getConnection(caminho, usuario, senha);
-			JOptionPane.showMessageDialog(null, "Conectado ao banco");//só pra teste
+			//JOptionPane.showMessageDialog(null, "Conectado ao banco");//só pra teste
 		} catch(SQLException ex){
 			JOptionPane.showMessageDialog(null, "Erro"+ex.getMessage());
 		}

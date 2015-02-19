@@ -34,9 +34,9 @@ import java.util.Arrays;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.sql.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TelaPrincipal extends JFrame {
 
@@ -162,6 +162,14 @@ public class TelaPrincipal extends JFrame {
 		panel_2.setLayout(null);
 
 		JLabel InserirReceita = new JLabel("Inserir Receita");
+		InserirReceita.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+
+				new JInserirReceita().setVisible(true);
+				// this.dispose();
+			}
+		});
 		InserirReceita.setFont(new Font("Century Gothic", Font.PLAIN, 16));
 		InserirReceita.setBounds(10, 418, 170, 50);
 		panel_2.add(InserirReceita);
@@ -169,6 +177,13 @@ public class TelaPrincipal extends JFrame {
 				.getResource("/img/plus+.png")));
 
 		JLabel InserirDespesas = new JLabel("Inserir Despesas");
+		InserirDespesas.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				new JInserirDespesa().setVisible(true);
+			}
+		});
 		InserirDespesas.setFont(new Font("Century Gothic", Font.PLAIN, 16));
 		InserirDespesas.setBounds(190, 418, 180, 50);
 		panel_2.add(InserirDespesas);
@@ -176,6 +191,12 @@ public class TelaPrincipal extends JFrame {
 				.getResource("/img/rounded61.png")));
 
 		JLabel InserirMetas = new JLabel("Inserir Metas");
+		InserirMetas.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new JMeta().setVisible(true);
+			}
+		});
 		InserirMetas.setFont(new Font("Century Gothic", Font.PLAIN, 16));
 		InserirMetas.setBounds(380, 418, 170, 50);
 		panel_2.add(InserirMetas);
@@ -190,6 +211,13 @@ public class TelaPrincipal extends JFrame {
 				.getResource("/img/pig.png")));
 
 		JLabel Relatorios = new JLabel("Relat\u00F3rios");
+		Relatorios.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				new JRelatório().setVisible(true);
+			}
+		});
 		Relatorios.setFont(new Font("Century Gothic", Font.PLAIN, 16));
 		Relatorios.setBounds(750, 418, 150, 50);
 		panel_2.add(Relatorios);
