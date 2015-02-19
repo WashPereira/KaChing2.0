@@ -36,7 +36,7 @@ public class JNumberFormatField extends JTextField {
     public JNumberFormatField(NumberFormat format) {// define o formato do  
         // número  
         numberFormat = format;// alinhamento horizontal para o texto  
-        setHorizontalAlignment(RIGHT);// documento responsável pela formatação  
+        setHorizontalAlignment(LEFT);// documento responsável pela formatação  
         // do campo  
         setDocument(new PlainDocument() {  
             private static final long serialVersionUID = 1L;  
