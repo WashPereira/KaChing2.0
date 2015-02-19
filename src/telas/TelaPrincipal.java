@@ -51,50 +51,44 @@ public class TelaPrincipal extends JFrame {
 	 * @param ex
 	 */
 
-	public void preencherTabela(String sql) {
-		ArrayList dados = new ArrayList();
-
-		String[] Colunas = new String[] { "ID", "IDP", "Despesa", "Check-in",
-				"Vencimento", "Descrição" };
-
-		// conecta.executarSQL(sql);
-		conecta.executarSQL(sql);
-
-		try {
-			conecta.rs.first();
-			do {
-				dados.add(new Object[] { conecta.rs.getInt("id_despesa"),
-						conecta.rs.getInt("id_perfil"),
-						conecta.rs.getString("nome_desp"),
-						conecta.rs.getBoolean("check_desp"),
-						conecta.rs.getDate("vencimento"),
-						conecta.rs.getString("descricao_desp") });
-
-			} while (conecta.rs.next());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			JOptionPane
-					.showMessageDialog(null, "Erro ao preencher a tabela \n");
-		}
-
-		modeloTabela modelo = new modeloTabela(dados, Colunas);
-		table_2.setModel(modelo);
-		table_2.getColumnModel().getColumn(0).setPreferredWidth(80);
-		table_2.getColumnModel().getColumn(0).setResizable(false);
-		table_2.getColumnModel().getColumn(1).setPreferredWidth(80);
-		table_2.getColumnModel().getColumn(1).setResizable(false);
-		table_2.getColumnModel().getColumn(2).setPreferredWidth(80);
-		table_2.getColumnModel().getColumn(2).setResizable(false);
-		table_2.getColumnModel().getColumn(3).setPreferredWidth(80);
-		table_2.getColumnModel().getColumn(3).setResizable(false);
-		table_2.getColumnModel().getColumn(4).setPreferredWidth(80);
-		table_2.getColumnModel().getColumn(4).setResizable(false);
-		table_2.getColumnModel().getColumn(5).setPreferredWidth(80);
-		table_2.getColumnModel().getColumn(5).setResizable(false);
-		table_2.setAutoResizeMode(table_2.AUTO_RESIZE_OFF);
-		table_2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-	}
+	/*
+	 * public void preencherTabela(String sql) { ArrayList dados = new
+	 * ArrayList();
+	 * 
+	 * String[] Colunas = new String[] { "ID", "IDP", "Despesa", "Check-in",
+	 * "Vencimento", "Descrição" };
+	 * 
+	 * // conecta.executarSQL(sql); conecta.executarSQL(sql);
+	 * 
+	 * try { conecta.rs.first(); do { dados.add(new Object[] {
+	 * conecta.rs.getInt("id_despesa"), conecta.rs.getInt("id_perfil"),
+	 * conecta.rs.getString("nome_desp"), conecta.rs.getBoolean("check_desp"),
+	 * conecta.rs.getDate("vencimento"), conecta.rs.getString("descricao_desp")
+	 * });
+	 * 
+	 * } while (conecta.rs.next()); } catch (SQLException e) { // TODO
+	 * Auto-generated catch block JOptionPane .showMessageDialog(null,
+	 * "Erro ao preencher a tabela \n"); }
+	 * 
+	 * modeloTabela modelo = new modeloTabela(dados, Colunas);
+	 * table_2.setModel(modelo);
+	 * table_2.getColumnModel().getColumn(0).setPreferredWidth(80);
+	 * table_2.getColumnModel().getColumn(0).setResizable(false);
+	 * table_2.getColumnModel().getColumn(1).setPreferredWidth(80);
+	 * table_2.getColumnModel().getColumn(1).setResizable(false);
+	 * table_2.getColumnModel().getColumn(2).setPreferredWidth(80);
+	 * table_2.getColumnModel().getColumn(2).setResizable(false);
+	 * table_2.getColumnModel().getColumn(3).setPreferredWidth(80);
+	 * table_2.getColumnModel().getColumn(3).setResizable(false);
+	 * table_2.getColumnModel().getColumn(4).setPreferredWidth(80);
+	 * table_2.getColumnModel().getColumn(4).setResizable(false);
+	 * table_2.getColumnModel().getColumn(5).setPreferredWidth(80);
+	 * table_2.getColumnModel().getColumn(5).setResizable(false);
+	 * table_2.setAutoResizeMode(table_2.AUTO_RESIZE_OFF);
+	 * table_2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	 * 
+	 * }
+	 */
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -122,7 +116,7 @@ public class TelaPrincipal extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		preencherTabela("select * from despesas order by id_despesa");
+		// preencherTabela("select * from despesas order by id_despesa");
 
 		JPanel panel = new JPanel();
 		panel.setForeground(Color.LIGHT_GRAY);
@@ -228,10 +222,10 @@ public class TelaPrincipal extends JFrame {
 		panel_2.add(lblInserirTabelaAqui);
 
 		table_2 = new JTable();
-		table_2.setModel(new DefaultTableModel(new Object[][] { { null, null },
-				{ null, null }, { null, null }, { null, null }, { null, null },
-				{ null, null }, { null, null }, { null, null }, { null, null },
-				{ null, null }, }, new String[] { "DESPESA", "VALOR" }));
+		table_2.setModel(new DefaultTableModel(new Object[][] {
+
+		}, new String[] { "DESPESA", "VALOR" }));
+
 		table_2.getColumnModel().getColumn(0).setPreferredWidth(446);
 		table_2.setBounds(20, 58, 765, 345);
 		panel_2.add(table_2);
