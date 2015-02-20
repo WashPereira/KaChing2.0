@@ -108,10 +108,11 @@ public class TelaPrincipal extends JFrame {
 	 */
 	public TelaPrincipal() {
 		conecta.conectar();
+
 		// TelaPrincipal.this.setEnabled(true);
 		setTitle("KaChing");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(1, 1, 1366, 700);
+		setBounds(1, 1, 1366, 738);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -135,6 +136,14 @@ public class TelaPrincipal extends JFrame {
 		panel.add(ImgPerfilM);
 
 		JLabel EditarPerfil = new JLabel("Editar Perfil");
+		EditarPerfil.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+
+				new JCadastroDePerfil().setVisible(true);
+
+			}
+		});
 		EditarPerfil.setVerticalAlignment(SwingConstants.TOP);
 		EditarPerfil.setIcon(new ImageIcon(TelaPrincipal.class
 				.getResource("/img/editar.png")));
@@ -167,7 +176,7 @@ public class TelaPrincipal extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 
-				TelaPrincipal.this.setEnabled(false);
+				// TelaPrincipal.this.setEnabled(false);
 				new JInserirReceita().setVisible(true);
 
 			}
@@ -247,25 +256,54 @@ public class TelaPrincipal extends JFrame {
 				.getResource("/img/apagar.png")));
 		panel_2.add(lblApagar);
 
-		JLabel lblInserirTabelaAqui = new JLabel("Inserir tabela aqui");
-		lblInserirTabelaAqui.setBounds(10, 33, 113, 14);
+		JLabel lblInserirTabelaAqui = new JLabel("Despesas");
+		lblInserirTabelaAqui
+				.setFont(new Font("Century Gothic", Font.PLAIN, 16));
+		lblInserirTabelaAqui.setBounds(275, 25, 189, 33);
 		panel_2.add(lblInserirTabelaAqui);
 
 		table_2 = new JTable();
 		table_2.setModel(new DefaultTableModel(new Object[][] {
+				{ null, null, null, null, null },
+				{ null, null, null, null, null },
+				{ null, null, null, null, null },
+				{ null, null, null, null, null },
+				{ null, null, null, null, null },
+				{ null, null, null, null, null },
+				{ null, null, null, null, null },
+				{ null, null, null, null, null },
+				{ null, null, null, null, null },
+				{ null, null, null, null, null },
+				{ null, null, null, null, null },
+				{ null, null, null, null, null },
+				{ null, null, null, null, null },
+				{ null, null, null, null, null },
+				{ null, null, null, null, null },
+				{ null, null, null, null, null },
+				{ null, null, null, null, null },
+				{ null, null, null, null, null },
+				{ null, null, null, null, null },
+				{ null, null, null, null, null },
+				{ null, null, null, null, null },
+				{ null, null, null, null, null },
 
 		}, new String[] { "DESPESA", "VALOR" }));
 
 		table_2.getColumnModel().getColumn(0).setPreferredWidth(446);
-		table_2.setBounds(20, 58, 765, 345);
+		table_2.setBounds(28, 58, 866, 337);
 		panel_2.add(table_2);
+
+		JLabel lblValor = new JLabel("Valor");
+		lblValor.setFont(new Font("Century Gothic", Font.PLAIN, 16));
+		lblValor.setBounds(737, 25, 141, 33);
+		panel_2.add(lblValor);
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(Color.WHITE);
 		panel_3.setBorder(new TitledBorder(new LineBorder(new Color(192, 192,
 				192)), "Linha do Tempo", TitledBorder.LEADING,
 				TitledBorder.TOP, null, Color.DARK_GRAY));
-		panel_3.setBounds(10, 501, 1330, 202);
+		panel_3.setBounds(10, 501, 1330, 186);
 		contentPane.add(panel_3);
 
 	}

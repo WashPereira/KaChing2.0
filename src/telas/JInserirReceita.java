@@ -59,11 +59,11 @@ public class JInserirReceita extends JFrame {
 	 */
 	public JInserirReceita() {
 		setResizable(false);
-		setAlwaysOnTop(true);
 		conecta.conectar();
+		setLocationRelativeTo(null);
 		// this.setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 750, 700);
+		setBounds(320, 2, 750, 700);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

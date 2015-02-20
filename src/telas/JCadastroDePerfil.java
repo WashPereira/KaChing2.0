@@ -72,6 +72,7 @@ public class JCadastroDePerfil extends JFrame {
 		setTitle("Perfil");
 		setResizable(false);
 		conecta.conectar();
+		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 750, 700);
 		contentPane = new JPanel();
@@ -265,7 +266,7 @@ public class JCadastroDePerfil extends JFrame {
 		lblVoltar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				new JLogin().setVisible(true);
+				// new JLogin().setVisible(true);
 				JCadastroDePerfil.this.dispose();
 			}
 		});
@@ -319,15 +320,13 @@ public class JCadastroDePerfil extends JFrame {
 		contentPane.add(panel);
 
 		cpf = new JTextField();
-		cpf.setBounds(18, 443, 701, 29);
+		cpf.setBounds(18, 438, 702, 30);
 		contentPane.add(cpf);
 		cpf.setColumns(10);
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.WHITE);
-		panel_1.setBorder(new TitledBorder(null, "Lembrete de senha",
-				TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(10, 397, 724, 153);
+		panel_1.setBounds(10, 400, 724, 148);
 		contentPane.add(panel_1);
 	}
 }

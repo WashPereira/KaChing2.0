@@ -53,6 +53,7 @@ public class JLogin extends JFrame {
 	public JLogin() {
 		conecta.conectar();
 		setResizable(false);
+		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 688, 477);
 		contentPane = new JPanel();
