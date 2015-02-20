@@ -101,6 +101,7 @@ public class JLogin extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 
 				new TelaPrincipal().setVisible(true);
+				JLogin.this.dispose();
 			}
 		});
 		lblEntar.setFont(new Font("Century Gothic", Font.PLAIN, 14));
@@ -115,6 +116,7 @@ public class JLogin extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 
 				new JCadastroDePerfil().setVisible(true);
+				JLogin.this.dispose();
 			}
 		});
 		lblCadastrar.setFont(new Font("Century Gothic", Font.PLAIN, 14));

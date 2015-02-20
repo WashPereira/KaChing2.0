@@ -108,6 +108,7 @@ public class TelaPrincipal extends JFrame {
 	 */
 	public TelaPrincipal() {
 		conecta.conectar();
+		// TelaPrincipal.this.setEnabled(true);
 		setTitle("KaChing");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(1, 1, 1366, 700);
@@ -166,8 +167,9 @@ public class TelaPrincipal extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 
+				TelaPrincipal.this.setEnabled(false);
 				new JInserirReceita().setVisible(true);
-				// this.dispose();
+
 			}
 		});
 		InserirReceita.setFont(new Font("Century Gothic", Font.PLAIN, 16));

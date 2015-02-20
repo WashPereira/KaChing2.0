@@ -30,6 +30,8 @@ import java.sql.SQLException;
 
 import javax.swing.JTextField;
 import javax.swing.UIManager;
+import telas.TelaPrincipal;
+import java.awt.Dialog.ModalExclusionType;
 
 public class JInserirReceita extends JFrame {
 
@@ -56,15 +58,20 @@ public class JInserirReceita extends JFrame {
 	 * Create the frame.
 	 */
 	public JInserirReceita() {
+		setResizable(false);
+		setAlwaysOnTop(true);
 		conecta.conectar();
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		// this.setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 750, 700);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JPanel panel_4 = new JPanel();
+		panel_4.setBackground(Color.WHITE);
 		panel_4.setBorder(new TitledBorder(null, "Saldo atual do caixa",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_4.setToolTipText("");
@@ -83,6 +90,7 @@ public class JInserirReceita extends JFrame {
 		lblSaldoAtual.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
 		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
 		panel.setBorder(new TitledBorder(null,
 				"Atualizar Salto atual do caixa", TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
@@ -103,6 +111,13 @@ public class JInserirReceita extends JFrame {
 		lblInserir.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
 		JLabel lblVoltar = new JLabel("Voltar");
+		lblVoltar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+
+				JInserirReceita.this.dispose();
+			}
+		});
 		lblVoltar.setBounds(29, 295, 121, 56);
 		contentPane.add(lblVoltar);
 		lblVoltar.setForeground(Color.DARK_GRAY);
@@ -120,14 +135,8 @@ public class JInserirReceita extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				try {
 					PreparedStatement pst = conecta.conn
-							.prepareStatement("INSERT INTO receita (id_perfil, mes_ano_receita, valor_receita, id_receita) VALUES (?,?,?,?)");// passar
-																																				// os
-																																				// dados
-																																				// por
-																																				// parametro
-																																				// para
-																																				// a
-																																				// tabela.
+							.prepareStatement("INSERT INTO receita (id_perfil, mes_ano_receita, valor_receita, id_receita) VALUES (?,?,?,?)");
+					// passar os dados por parametro para a tabela.
 
 					// --Capturar as informações do formulário para o banco--//
 					pst.setInt(1, 4);
